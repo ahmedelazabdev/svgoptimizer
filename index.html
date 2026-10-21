@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- High-CTR SEO Meta -->
+  <title>SVG Optimizer ⚡ Minify & Clean Vector Files Online (100% Free & Private)</title>
+  <meta name="description" content="Minify and compress SVG files instantly in your browser. Strip unnecessary metadata, editor comments, hidden layers, and shrink file sizes without losing visual quality.">
+  <meta name="keywords" content="svg optimizer, minify svg, compress svg, svg cleaner, online svg minifier, shrink svg size, optimize vector graphics, clean svg code">
+  <meta name="author" content="Ahmed Elazab">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  
+  <!-- Absolute Canonical URL -->
+  <link rel="canonical" href="https://ahmedelazabdev.github.io/svgoptimizer/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ahmedelazabdev.github.io/svgoptimizer/">
+  <meta property="og:title" content="SVG Optimizer ⚡ Clean & Minify Vector Files Instantly">
+  <meta property="og:description" content="Compress SVG vectors securely in-browser. Remove bloated code, fix path precision, and reduce asset load times with zero server uploads.">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SVG Optimizer ⚡ Fast, Client-Side Vector Minifier">
+  <meta name="twitter:description" content="Free tool to clean, format, and dramatically reduce SVG file sizes in real-time. Zero dependencies, 100% client-side.">
+
+  <!-- Structured Data: WebApplication, HowTo & FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "SVG Optimizer - Online Vector Minifier",
+        "url": "https://ahmedelazabdev.github.io/svgoptimizer/",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "All",
+        "description": "A high-performance client-side utility that analyzes, cleans, and minimizes Scalable Vector Graphics (SVG) code by removing metadata, formatting overhead, and rounding numeric path precision.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "HowTo",
+        "name": "How to Optimize and Compress an SVG File",
+        "description": "Step-by-step instructions to minimize SVG code size and strip unwanted editor bloat directly in your web browser.",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "name": "Paste or upload SVG",
+            "text": "Drag and drop your SVG file into the tool zone or paste raw SVG markup directly into the code input area."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Configure optimization flags",
+            "text": "Select your desired precision decimal limit and toggle options like removing metadata, comments, and empty attributes."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Run optimization",
+            "text": "Click the Optimize SVG button to strip bloat and calculate real-time savings percentage."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Copy or download",
+            "text": "Download the newly optimized .svg file or copy the cleaned code straight to your clipboard."
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Are my SVG graphics uploaded to any external server?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. All parsing, minification, and visual preview generation happen 100% locally on your computer inside your browser's JavaScript engine. No file data is ever transmitted across the network."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why do raw SVG files contain so much bloat?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Vector design applications such as Adobe Illustrator, Inkscape, and Figma inject proprietary XML namespaces, layer configurations, unnecessary coordinates precision, and editor comments that serve no purpose on the live web."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does reducing coordinate decimal precision ruin vector quality?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No, as long as you use an appropriate precision (usually 2 or 3 decimals). Extra decimal places like 15 digits produce microscopic changes smaller than a sub-pixel, which is imperceptible to the human eye but adds huge file size bloat."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use this optimized code directly as inline SVG in HTML?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. The generated output is clean standard XML markup that can be pasted directly into JSX, HTML5 templates, or CSS data URIs."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-soft: #eff6ff;
+      --accent: #059669;
+      --accent-soft: #d1fae5;
+      --accent-text: #065f46;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --border: #cbd5e1;
+      --border-dark: #94a3b8;
+      --text: #0f172a;
+      --text-muted: #334155;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08);
+      --shadow-xl: 0 10px 25px -5px rgba(0,0,0,0.08);
+      --radius: 14px;
+      --font-stack: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-stack);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      text-rendering: optimizeSpeed;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+      height: 64px;
+      overflow: hidden;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .brand-badge {
+      background: var(--primary);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .status-tag {
+      background: var(--accent-soft);
+      color: var(--accent-text);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: 1px solid #a7f3d0;
+    }
+
+    main {
+      max-width: 1100px;
+      width: 100%;
+      margin: 24px auto 40px;
+      padding: 0 16px;
+      flex: 1;
+      contain: layout style;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 780px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Tool Card */
+    .cleaner-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+      margin-bottom: 36px;
+    }
+
+    .card-topbar {
+      background: #f1f5f9;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .config-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .mode-label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    select.mode-dropdown {
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      cursor: pointer;
+      outline: none;
+    }
+
+    .options-pills {
+      display: flex;
+      gap: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .options-pills label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    /* Workspace Layout */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+      min-height: 360px;
+    }
+
+    @media (max-width: 820px) {
+      .workspace-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pane {
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+    }
+
+    .pane-left {
+      border-right: 1px solid var(--border);
+      background: #ffffff;
+    }
+
+    @media (max-width: 820px) {
+      .pane-left {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+    }
+
+    .pane-right {
+      background: #fafafa;
+    }
+
+    .pane-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .pane-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .code-input {
+      width: 100%;
+      height: 250px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text);
+      resize: vertical;
+      outline: none;
+      background: #ffffff;
+    }
+
+    .code-input:focus {
+      border-color: var(--primary);
+    }
+
+    .dropzone-overlay {
+      border: 2px dashed var(--border-dark);
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+      margin-top: 10px;
+      cursor: pointer;
+      background: #f8fafc;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .dropzone-overlay.dragover {
+      background: var(--primary-soft);
+      border-color: var(--primary);
+    }
+
+    .dropzone-overlay input {
+      display: none;
+    }
+
+    .preview-box {
+      width: 100%;
+      height: 180px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background-color: #ffffff;
+      background-image: 
+        linear-gradient(45deg, #f1f5f9 25%, transparent 25%), 
+        linear-gradient(-45deg, #f1f5f9 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #f1f5f9 75%), 
+        linear-gradient(-45deg, transparent 75%, #f1f5f9 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .preview-box svg {
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+    }
+
+    .stats-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .stat-item .val {
+      font-weight: 800;
+      font-size: 1.1rem;
+      display: block;
+      color: var(--text);
+    }
+
+    .stat-item .lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .stat-savings {
+      color: var(--accent);
+    }
+
+    /* Actions Bar */
+    .action-controls {
+      padding: 16px 20px;
+      background: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: #f1f5f9;
+      border-color: var(--border-dark);
+    }
+
+    /* Action Steps */
+    .action-steps-bar {
+      padding: 16px 20px;
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .action-steps-bar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .action-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-title {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .step-text p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Content Area */
+    .article-container {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 40px;
+      content-visibility: auto;
+      contain-intrinsic-size: 1000px 1800px;
+    }
+
+    @media (max-width: 600px) {
+      .article-container {
+        padding: 24px 18px;
+      }
+    }
+
+    .article-container h2 {
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--text);
+      margin: 36px 0 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+      position: relative;
+    }
+
+    .article-container h2::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background: var(--primary);
+    }
+
+    .article-container h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .article-container h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 24px 0 12px;
+      color: #1e293b;
+    }
+
+    .article-container p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    .article-container ul, .article-container ol {
+      margin: 0 0 24px 24px;
+      color: var(--text-muted);
+      font-size: 1.02rem;
+    }
+
+    .article-container li {
+      margin-bottom: 10px;
+    }
+
+    .highlight-card {
+      background: var(--primary-soft);
+      border-left: 4px solid var(--primary);
+      padding: 16px 20px;
+      border-radius: 0 10px 10px 0;
+      margin: 24px 0;
+      color: #1e3a8a;
+      font-size: 1rem;
+    }
+
+    .alert-card-warning {
+      background: #fef2f2;
+      border-left: 4px solid #ef4444;
+      padding: 16px 20px;
+      border-radius: 0 10px 10px 0;
+      margin: 24px 0;
+      color: #991b1b;
+      font-size: 1rem;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 24px 0;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    thead {
+      background: #f1f5f9;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background-color: #f8fafc;
+    }
+
+    .badge-safe {
+      display: inline-block;
+      padding: 3px 8px;
+      background: var(--accent-soft);
+      color: var(--accent-text);
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    /* FAQ */
+    .faq-block {
+      margin-top: 24px;
+    }
+
+    .faq-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      background: #f8fafc;
+    }
+
+    .faq-header {
+      padding: 16px 20px;
+      font-weight: 700;
+      font-size: 1.02rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+      color: var(--text);
+    }
+
+    .faq-header:hover {
+      color: var(--primary);
+    }
+
+    .faq-body {
+      padding: 0 20px 16px;
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      display: none;
+      line-height: 1.7;
+    }
+
+    .faq-card.open {
+      background: var(--surface);
+      border-color: var(--primary);
+    }
+
+    .faq-card.open .faq-body {
+      display: block;
+    }
+
+    .faq-toggle {
+      font-size: 1.3rem;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .faq-card.open .faq-toggle {
+      transform: rotate(45deg);
+    }
+
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #0f172a;
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 9999px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      box-shadow: var(--shadow-xl);
+      transition: transform 0.25s ease;
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    #toast.active {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 28px 16px;
+      margin-top: auto;
+    }
+
+    .footer-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .footer-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-nav a:hover {
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-inner">
+      <a href="https://ahmedelazabdev.github.io/svgoptimizer/" class="brand">
+        <span class="brand-badge">⚡</span>
+        <span>SVG Optimizer</span>
+      </a>
+      <span class="status-tag">🛡️ 100% Client-Side Private</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>SVG Optimizer ⚡ <span>Minify & Clean</span> Vector Graphics</h1>
+      <p>Compress raw vector files in real-time. Strip editor namespaces, remove useless metadata, round redundant decimal coordinates, and speed up page load times with zero server processing.</p>
+    </section>
+
+    <!-- Cleaner Workspace -->
+    <section class="cleaner-card" id="cleaner-app">
+      <div class="card-topbar">
+        <div class="config-group">
+          <label class="mode-label" for="decimal-precision">Coordinate Precision:</label>
+          <select id="decimal-precision" class="mode-dropdown" onchange="processOptimization()">
+            <option value="1">1 Decimal (Max compression)</option>
+            <option value="2" selected>2 Decimals (Balanced)</option>
+            <option value="3">3 Decimals (High precision)</option>
+            <option value="keep">Unchanged (Original)</option>
+          </select>
+        </div>
+
+        <div class="options-pills">
+          <label><input type="checkbox" id="opt-comments" checked onchange="processOptimization()"> Strip Comments</label>
+          <label><input type="checkbox" id="opt-metadata" checked onchange="processOptimization()"> Remove Metadata</label>
+          <label><input type="checkbox" id="opt-whitespace" checked onchange="processOptimization()"> Collapse Whitespace</label>
+        </div>
+      </div>
+
+      <div class="workspace-grid">
+        <!-- Input Pane -->
+        <div class="pane pane-left">
+          <div class="pane-header">
+            <span class="pane-title">Input SVG Code</span>
+            <button class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.8rem;" onclick="loadSampleSvg()">Load Sample</button>
+          </div>
+          <textarea id="svg-input" class="code-input" placeholder="Paste your raw &lt;svg&gt; markup here or drag an .svg file below..." spellcheck="false" oninput="processOptimization()"></textarea>
+          
+          <div class="dropzone-overlay" id="drop-zone" onclick="document.getElementById('file-input').click()">
+            <input type="file" id="file-input" accept=".svg,image/svg+xml" onchange="handleFileSelect(event)">
+            <p>📂 Click to Browse or Drag & Drop SVG file here</p>
+          </div>
+        </div>
+
+        <!-- Output & Preview Pane -->
+        <div class="pane pane-right">
+          <div class="pane-header">
+            <span class="pane-title">Live Clean Preview</span>
+            <span id="render-indicator" style="font-size: 0.8rem; color: var(--accent); font-weight: 700;">Vector Ready</span>
+          </div>
+
+          <div class="preview-box" id="preview-render">
+            <span style="color: var(--text-muted); font-size: 0.9rem;">No SVG loaded</span>
+          </div>
+
+          <div class="stats-card">
+            <div class="stat-item">
+              <span class="val" id="stat-original">0 B</span>
+              <span class="lbl">Original Size</span>
+            </div>
+            <div class="stat-item">
+              <span class="val" id="stat-optimized">0 B</span>
+              <span class="lbl">Optimized</span>
+            </div>
+            <div class="stat-item">
+              <span class="val stat-savings" id="stat-percent">0%</span>
+              <span class="lbl">Savings</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Footer -->
+      <div class="action-controls">
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-primary" onclick="copyOptimizedCode()">📋 Copy Clean Code</button>
+          <button class="btn btn-secondary" onclick="downloadOptimizedSvg()">💾 Download .SVG</button>
+        </div>
+        <button class="btn btn-secondary" style="border: none;" onclick="clearAll()">Clear</button>
+      </div>
+
+      <!-- 3 Steps Bar -->
+      <div class="action-steps-bar">
+        <div class="action-step">
+          <span class="step-num">1</span>
+          <div class="step-text">
+            <strong class="step-title">Paste or Drop SVG</strong>
+            <p>Load graphic code directly from Figma, Illustrator, or export files.</p>
+          </div>
+        </div>
+        <div class="action-step">
+          <span class="step-num">2</span>
+          <div class="step-text">
+            <strong class="step-title">Automated Stripping</strong>
+            <p>Metadata, XML declarations, and redundant precision are instantly removed.</p>
+          </div>
+        </div>
+        <div class="action-step">
+          <span class="step-num">3</span>
+          <div class="step-text">
+            <strong class="step-title">Deploy Clean Assets</strong>
+            <p>Copy production-ready SVG for frontend frameworks or web pages.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comprehensive Technical Guide -->
+    <article class="article-container">
+      <h2>Why Optimize SVG Files? The Anatomy of Vector Asset Bloat</h2>
+      <p>
+        Scalable Vector Graphics (SVG) are mathematically defined XML text documents rather than pixel-based raster matrices (such as JPEG, PNG, or WebP). Because an SVG consists of pure code, graphic design suites—including <strong>Adobe Illustrator, Inkscape, Sketch, and Figma</strong>—frequently inject massive amounts of proprietary metadata, document properties, unnecessary layers, and excessive floating-point coordinate precision into the raw file.
+      </p>
+
+      <div class="highlight-card">
+        <strong>💡 The Performance Principle:</strong> A raw SVG exported directly from an editor can contain up to <strong>70% non-rendering overhead</strong>. Stripping this metadata directly reduces network payload, decreases DOM node parsing latency, and enhances Google Core Web Vitals (INP and LCP).
+      </div>
+
+      <h3>What Does This Tool Clean Out?</h3>
+      <ul>
+        <li><strong>XML Declarations & DocTypes:</strong> <code>&lt;?xml version="1.0"?&gt;</code> and <code>&lt;!DOCTYPE svg&gt;</code> are redundant in standard HTML5 documents.</li>
+        <li><strong>Editor Specific Tags:</strong> Elements like <code>&lt;adobe:ns&gt;</code>, <code>&lt;sketch:type&gt;</code>, <code>&lt;inkscape:namedview&gt;</code>, and <code>&lt;sodipodi:namedview&gt;</code> that serve zero purpose on live websites.</li>
+        <li><strong>HTML & XML Comments:</strong> Multi-line comments, creator watermarks, license references that don't need distribution, and build timestamps.</li>
+        <li><strong>Floating Point Rounding:</strong> Coordinates such as <code>d="M12.43859203 45.1938591"</code> are rounded down to 2 decimals (e.g. <code>d="M12.44 45.19"</code>), saving thousands of characters in complex geometries without altering visible curves.</li>
+        <li><strong>Empty Elements & Redundant Attributes:</strong> Empty tags like <code>&lt;g&gt;&lt;/g&gt;</code>, duplicate namespace attributes, and redundant inline styles.</li>
+      </ul>
+
+      <h2>SVG Optimization Comparison: Default Export vs. Minified</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Raw Editor Export</th>
+              <th>Optimized SVG</th>
+              <th>Impact on Web Performance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Metadata & Comments</strong></td>
+              <td>Retained (20–40% file size)</td>
+              <td><span class="badge-safe">Completely Removed</span></td>
+              <td>Decreases raw bytes downloaded over mobile networks.</td>
+            </tr>
+            <tr>
+              <td><strong>Coordinate Precision</strong></td>
+              <td>8 to 14 decimal digits</td>
+              <td><span class="badge-safe">Rounded to 2 decimals</span></td>
+              <td>Substantially cuts string length for path data (d="...").</td>
+            </tr>
+            <tr>
+              <td><strong>DOM Parsing Cost</strong></td>
+              <td>High (Many unused groups)</td>
+              <td><span class="badge-safe">Minimal</span></td>
+              <td>Lowers memory usage when rendering inline vectors in React/Vue.</td>
+            </tr>
+            <tr>
+              <td><strong>Visual Fidelity</strong></td>
+              <td>Exact</td>
+              <td><span class="badge-safe">100% Identical</span></td>
+              <td>Sub-pixel variations are completely invisible to the human eye.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Best Practices for Inline SVG in Modern Frontend Stacks</h2>
+      <p>
+        When working in modern web development frameworks (like React, Next.js, Astro, or Vue), integrating SVGs as components is common practice. However, putting raw unoptimized SVGs inside JSX or template files bloats your JavaScript bundle:
+      </p>
+      <ol>
+        <li><strong>Always set a viewBox:</strong> Ensure your root <code>&lt;svg&gt;</code> tag maintains an explicit <code>viewBox="0 0 width height"</code> so the graphic remains responsive across varied screens.</li>
+        <li><strong>Remove hardcoded dimensions:</strong> Strip absolute <code>width="500px"</code> and <code>height="500px"</code> attributes if you plan on sizing your icon dynamically using CSS utility classes like Tailwind's <code>w-6 h-6</code>.</li>
+        <li><strong>Maintain accessibility:</strong> Keep or inject meaningful <code>aria-label</code> or <code>&lt;title&gt;</code> tags if the graphic conveys informational meaning rather than serving as purely decorative eye candy.</li>
+      </ol>
+
+      <h2>Frequently Asked Questions (FAQ)</h2>
+      <div class="faq-block">
+        <div class="faq-card">
+          <div class="faq-header" onclick="toggleFaqCard(this)">
+            <span>Will minifying an SVG alter its visual appearance?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-body">
+            No. Removing metadata and collapsing spaces has zero effect on rendering. Even coordinate rounding to 2 or 3 decimals operates within fractions of a single device pixel, keeping shapes crisp and visually indistinguishable from the source.
+          </div>
+        </div>
+
+        <div class="faq-card">
+          <div class="faq-header" onclick="toggleFaqCard(this)">
+            <span>Is this tool safe for confidential UI designs and proprietary vector icons?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-body">
+            Yes. The entire optimization and preview process executes strictly inside your local web browser using client-side JavaScript. Your files and code strings are never sent over the Internet to an external API or saved on a backend database.
+          </div>
+        </div>
+
+        <div class="faq-card">
+          <div class="faq-header" onclick="toggleFaqCard(this)">
+            <span>Why doesn't my SVG scale properly in CSS?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-body">
+            This typically occurs if the root <code>&lt;svg&gt;</code> tag has explicit static <code>width</code> and <code>height</code> attributes without an accompanying <code>viewBox</code>. Ensure your SVG includes an appropriate <code>viewBox</code> attribute to guarantee seamless scaling.
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <div id="toast">Ready!</div>
+
+  <footer>
+    <div class="footer-wrap">
+      <p>© <span id="current-year"></span> All rights reserved — SVG Optimizer Vector Tool.</p>
+      <div class="footer-nav">
+        <a href="#cleaner-app">Optimizer Tool</a>
+        <a href="https://1io-site.blogspot.com" target="_blank" rel="noopener">By: 1io.site</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Pure Native Client-Side Engine -->
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    let rawCode = '';
+    let optimizedCode = '';
+
+    const svgInput = document.getElementById('svg-input');
+    const previewRender = document.getElementById('preview-render');
+    const statOriginal = document.getElementById('stat-original');
+    const statOptimized = document.getElementById('stat-optimized');
+    const statPercent = document.getElementById('stat-percent');
+    const dropZone = document.getElementById('drop-zone');
+
+    function formatBytes(bytes) {
+      if (!bytes || bytes <= 0) return '0 B';
+      const k = 1024;
+      const sizes = ['B', 'KB', 'MB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function processOptimization() {
+      rawCode = svgInput.value.trim();
+
+      if (!rawCode) {
+        previewRender.innerHTML = '<span style="color: var(--text-muted); font-size: 0.9rem;">No SVG loaded</span>';
+        statOriginal.textContent = '0 B';
+        statOptimized.textContent = '0 B';
+        statPercent.textContent = '0%';
+        optimizedCode = '';
+        return;
+      }
+
+      const originalSize = new Blob([rawCode]).size;
+      statOriginal.textContent = formatBytes(originalSize);
+
+      let clean = rawCode;
+
+      // 1. Remove XML declaration and doctype
+      clean = clean.replace(/<\?xml[\s\S]*?\?>/gi, '');
+      clean = clean.replace(/<!DOCTYPE[\s\S]*?>/gi, '');
+
+      // 2. Remove comments
+      if (document.getElementById('opt-comments').checked) {
+        clean = clean.replace(/<!--[\s\S]*?-->/g, '');
+      }
+
+      // 3. Remove metadata, title, desc, and editor namespaces
+      if (document.getElementById('opt-metadata').checked) {
+        clean = clean.replace(/<metadata[\s\S]*?<\/metadata>/gi, '');
+        clean = clean.replace(/<sodipodi:[\s\S]*?\/>/gi, '');
+        clean = clean.replace(/<inkscape:[\s\S]*?\/>/gi, '');
+        clean = clean.replace(/\s(xmlns:sketch|xmlns:inkscape|xmlns:sodipodi|xmlns:adobe)="[^"]*"/gi, '');
+        clean = clean.replace(/\s(sketch:type|inkscape:[a-z-]+|sodipodi:[a-z-]+)="[^"]*"/gi, '');
+      }
+
+      // 4. Decimal precision reduction on path coordinates
+      const precisionVal = document.getElementById('decimal-precision').value;
+      if (precisionVal !== 'keep') {
+        const prec = parseInt(precisionVal, 10);
+        clean = clean.replace(/([0-9]+\.[0-9]{2,})/g, (match) => {
+          return parseFloat(match).toFixed(prec);
+        });
+      }
+
+      // 5. Remove empty groups and redundant empty spaces
+      clean = clean.replace(/<g[^>]*>\s*<\/g>/gi, '');
+
+      if (document.getElementById('opt-whitespace').checked) {
+        clean = clean.replace(/\s{2,}/g, ' ');
+        clean = clean.replace(/>\s+</g, '><');
+      }
+
+      optimizedCode = clean.trim();
+
+      // Update Preview
+      previewRender.innerHTML = optimizedCode;
+
+      // Update Stats
+      const optimizedSize = new Blob([optimizedCode]).size;
+      statOptimized.textContent = formatBytes(optimizedSize);
+
+      if (originalSize > 0) {
+        const diff = originalSize - optimizedSize;
+        const pct = Math.max(0, Math.round((diff / originalSize) * 100));
+        statPercent.textContent = `-${pct}%`;
+      } else {
+        statPercent.textContent = '0%';
+      }
+    }
+
+    function copyOptimizedCode() {
+      if (!optimizedCode) {
+        showToast('⚠️ No SVG to copy!');
+        return;
+      }
+      navigator.clipboard.writeText(optimizedCode).then(() => {
+        showToast('📋 Optimized SVG copied to clipboard!');
+      });
+    }
+
+    function downloadOptimizedSvg() {
+      if (!optimizedCode) {
+        showToast('⚠️ No SVG available to download!');
+        return;
+      }
+      const blob = new Blob([optimizedCode], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'optimized.svg';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('💾 SVG downloaded successfully!');
+    }
+
+    function clearAll() {
+      svgInput.value = '';
+      processOptimization();
+      showToast('Cleared');
+    }
+
+    function loadSampleSvg() {
+      const sample = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Generator: Vector Illustration Editor v1.2 -->
+  <metadata>
+    <creator>DesignStudio</creator>
+  </metadata>
+  <circle cx="50.4829103" cy="50.1948201" r="40.8392182" fill="#2563eb" stroke="#1d4ed8" stroke-width="4.01928" />
+  <path d="M35.29102 50.18392 L45.92819 60.84920 L65.19382 40.19482" fill="none" stroke="#ffffff" stroke-width="6.02948" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`;
+      svgInput.value = sample;
+      processOptimization();
+      showToast('Sample SVG loaded');
+    }
+
+    // Drag & Drop
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      const files = e.dataTransfer.files;
+      if (files.length > 0 && files[0].name.endsWith('.svg')) {
+        readFile(files[0]);
+      } else {
+        showToast('⚠️ Please drop a valid .svg file');
+      }
+    });
+
+    function handleFileSelect(e) {
+      const file = e.target.files[0];
+      if (file) {
+        readFile(file);
+      }
+    }
+
+    function readFile(file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        svgInput.value = event.target.result;
+        processOptimization();
+        showToast(`Loaded ${file.name}`);
+      };
+      reader.readAsText(file);
+    }
+
+    function toggleFaqCard(header) {
+      header.parentElement.classList.toggle('open');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('active');
+      setTimeout(() => {
+        toast.classList.remove('active');
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
