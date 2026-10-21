@@ -1,0 +1,19 @@
+# SVG Optimizer
+> Online Vector Graphics Cleaner & Minifier (100% Client-Side)
+
+## Project Overview
+SVG Optimizer is a fast, lightweight, and privacy-conscious web utility created to strip metadata, editor bloat, unnecessary XML declarations, and redundant precision from Scalable Vector Graphics (SVG).
+
+## Canonical URL
+https://ahmedelazabdev.github.io/svgoptimizer/
+
+## Core Features
+- In-browser parsing and minification using native JavaScript regex & DOM manipulation.
+- Strips Inkscape, Adobe Illustrator, Figma, and Sketch proprietary namespaces and metadata.
+- Decimal coordinate precision rounding (1, 2, or 3 decimals) to drastically reduce path coordinate lengths.
+- Real-time live visual rendered preview with checkered transparency grid.
+- Calculates absolute byte and percentage savings instantly.
+- 100% client-side: Zero file transmission or backend storage.
+
+## Target Audience
+Frontend web developers, UI/UX engineers, technical writers, and digital designers needing lightweight inline SVGs.
